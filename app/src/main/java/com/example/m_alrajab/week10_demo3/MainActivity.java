@@ -58,10 +58,12 @@ public class MainActivity extends AppCompatActivity {
         waves.start();
     }
 
+/* - This is not needed.  The sound file plays without it.
     public void playMusic(View view)
     {
         waves.start();
     }
+*/
 
     public void setRect(View view) {
         SharedValuesXY.drawingMode="RECT";
