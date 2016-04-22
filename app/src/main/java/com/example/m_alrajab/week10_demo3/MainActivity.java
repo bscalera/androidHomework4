@@ -12,6 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -56,6 +58,32 @@ public class MainActivity extends AppCompatActivity {
         waves = MediaPlayer.create(MainActivity.this, R.raw.oceanwavescrushing);
         waves.setLooping(true);
         waves.start();
+
+        animate();
+    }
+
+    public void animate()
+    {
+        TranslateAnimation anim=new TranslateAnimation(0,0,100,100);
+
+
+        anim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                // the second part of the anima
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
     }
 
 /* - This is not needed.  The sound file plays without it.
