@@ -113,8 +113,5 @@
             />
 
     </LinearLayout>
-    <com.example.m_alrajab.week10_demo3.MyPanel
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
     
 </LinearLayout>

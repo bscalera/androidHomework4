@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     StartDraggingLsntr myStartDraggingLsnr;
     EndDraggingLsntr myEndDraggingLsntr;
     Button rectBtn, ovalBtn, btn1, btn2;
-    MyPanel panel;
+    //MyPanel panel;
     MediaPlayer waves;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 */
 
     public void setRect(View view) {
-        SharedValuesXY.drawingMode="RECT";
+        //SharedValuesXY.drawingMode="RECT";
         String description;
         description = "sequence: " + findViewById(R.id.Btn1).getContentDescription() + ", "
                 + findViewById(R.id.Btn2).getContentDescription() + ", "
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this, description, Toast.LENGTH_SHORT).show();
     }
     public void setOval(View view) {
-        SharedValuesXY.drawingMode="OVAL";
+        //SharedValuesXY.drawingMode="OVAL";
     }
 
     public void exit(View view) {
