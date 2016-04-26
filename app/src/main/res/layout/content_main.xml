@@ -111,7 +111,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/ic_play_arrow_black_24dp"
             android:id="@+id/rectBtn"
-            android:onClick="setRect"
+            android:onClick="play"
             />
 
     </LinearLayout>
@@ -147,6 +147,7 @@
         android:layout_width="50dp"
         android:layout_height="100dp"
         android:background="@drawable/stick_figure"
+        android:id="@+id/stickFigure"
         />
     <!--725px-Stick_Figure.svg.png from https://commons.wikimedia.org/wiki/File:Stick_Figure.svg-->
 

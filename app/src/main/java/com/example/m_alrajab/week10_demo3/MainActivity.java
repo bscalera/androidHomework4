@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,8 +14,10 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     Button rectBtn, ovalBtn, btn1, btn2;
     //MyPanel panel;
     MediaPlayer waves;
+    Animation animation;
+    ImageView stickFigure;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         myStartDraggingLsnr=new StartDraggingLsntr();
         myEndDraggingLsntr=new EndDraggingLsntr();
 
+        stickFigure = (ImageView) findViewById(R.id.stickFigure);
         rectBtn=(Button) findViewById(R.id.rectBtn);
         findViewById(R.id.rectBtn).setOnLongClickListener(myStartDraggingLsnr);
         findViewById(R.id.ovalBtn).setOnLongClickListener(myStartDraggingLsnr);
@@ -93,7 +99,10 @@ public class MainActivity extends AppCompatActivity {
     }
 */
 
-    public void setRect(View view) {
+    public void play(View view) {
+        animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.translate);
+        stickFigure.startAnimation(animation);
+
         //SharedValuesXY.drawingMode="RECT";
         String description;
         description = "sequence: " + findViewById(R.id.Btn1).getContentDescription() + ", "
