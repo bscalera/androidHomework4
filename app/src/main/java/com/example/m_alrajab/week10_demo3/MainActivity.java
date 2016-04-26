@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         stickFigure = (ImageView) findViewById(R.id.stickFigure);
         rectBtn=(Button) findViewById(R.id.rectBtn);
         findViewById(R.id.rectBtn).setOnLongClickListener(myStartDraggingLsnr);
-        findViewById(R.id.ovalBtn).setOnLongClickListener(myStartDraggingLsnr);
         findViewById(R.id.upBtn).setOnLongClickListener(myStartDraggingLsnr);
         findViewById(R.id.downBtn).setOnLongClickListener(myStartDraggingLsnr);
         findViewById(R.id.leftBtn).setOnLongClickListener(myStartDraggingLsnr);
@@ -111,9 +110,6 @@ public class MainActivity extends AppCompatActivity {
                 + findViewById(R.id.Btn4).getContentDescription();
         //I found getContentDescription by typing "get" after the button and then looking through the suggestions.
         Toast.makeText(MainActivity.this, description, Toast.LENGTH_SHORT).show();
-    }
-    public void setOval(View view) {
-        //SharedValuesXY.drawingMode="OVAL";
     }
 
     public void exit(View view) {
