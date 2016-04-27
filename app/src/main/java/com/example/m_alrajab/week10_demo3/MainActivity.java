@@ -99,8 +99,17 @@ public class MainActivity extends AppCompatActivity {
 */
 
     public void play(View view) {
-        animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.translate);
-        stickFigure.startAnimation(animation);
+
+        try {
+            if (findViewById(R.id.Btn1).getContentDescription().equals("right")) {
+                animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.translate);
+                stickFigure.startAnimation(animation);
+            }
+        }
+        catch (NullPointerException e)
+        {
+            Toast.makeText(MainActivity.this, "There is nothing in step 1 to be played.", Toast.LENGTH_SHORT).show();
+        }
 
         //SharedValuesXY.drawingMode="RECT";
         String description;
