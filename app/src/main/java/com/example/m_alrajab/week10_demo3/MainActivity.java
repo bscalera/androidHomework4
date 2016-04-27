@@ -101,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
     public void play(View view) {
 
         try {
-            if (findViewById(R.id.Btn1).getContentDescription().equals("right")) {
+            if (findViewById(R.id.Btn1).getContentDescription().equals("right")
+                    && findViewById(R.id.Btn2).getContentDescription().equals("up")) {
                 animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.translate);
                 stickFigure.startAnimation(animation);
             }
