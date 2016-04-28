@@ -62,7 +62,6 @@
             android:layout_height="wrap_content"
             android:background="@drawable/ic_arrow_upward_black_24dp"
             android:id="@+id/upBtn"
-            android:onClick="setRect"
             android:contentDescription="up"
             />
 
@@ -72,7 +71,6 @@
             android:layout_height="wrap_content"
             android:background="@drawable/ic_arrow_downward_black_24dp"
             android:id="@+id/downBtn"
-            android:onClick="playMusic"
             android:contentDescription="down"
             />
 
@@ -82,7 +80,6 @@
             android:layout_height="wrap_content"
             android:background="@drawable/ic_arrow_back_black_24dp"
             android:id="@+id/leftBtn"
-            android:onClick="setRect"
             android:contentDescription="left"
             />
 
@@ -92,7 +89,6 @@
             android:layout_height="wrap_content"
             android:background="@drawable/ic_arrow_forward_black_24dp"
             android:id="@+id/rightBtn"
-            android:onClick="setRect"
             android:contentDescription="right"
             />
 
