@@ -12,5 +12,9 @@
     <!--
     startOffset is the delay before the animation starts.
     http://developer.android.com/reference/android/view/animation/Animation.html
+
+    android:fillAfter
+    When set to true, the animation transformation is applied after the animation is over.
+    http://developer.android.com/reference/android/view/animation/Animation.html
     -->
  </set>

@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     //MyPanel panel;
     MediaPlayer waves;
     Animation animation;
+    Animation animation1_1;
     ImageView stickFigure;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "repeated", Toast.LENGTH_SHORT).show();
             }
         });
+        animation1_1 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.translate1_1);
     }
 
     public void animate()
@@ -126,25 +128,12 @@ public class MainActivity extends AppCompatActivity {
                     && findViewById(R.id.Btn2).getContentDescription().equals("up")) {
                 animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.translate);
                 stickFigure.startAnimation(animation);
-
-                animation.setAnimationListener(new Animation.AnimationListener() {
-                    int a;
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-                        Toast.makeText(MainActivity.this, "started", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        // the second part of the anima
-                        Toast.makeText(MainActivity.this, "finished", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-                        Toast.makeText(MainActivity.this, "repeated", Toast.LENGTH_SHORT).show();
-                    }
-                });
+            }
+            else if (findViewById(R.id.Btn1).getContentDescription().equals("right")
+                    && ! findViewById(R.id.Btn2).getContentDescription().equals("up"))
+            {
+                animation1_1 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.translate1_1);
+                stickFigure.startAnimation(animation1_1);
             }
         }
         catch (NullPointerException e)
