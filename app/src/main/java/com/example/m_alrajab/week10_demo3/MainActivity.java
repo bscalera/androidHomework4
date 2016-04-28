@@ -64,7 +64,28 @@ public class MainActivity extends AppCompatActivity {
         waves.setLooping(true);
         waves.start();
 
-        animate();
+        //animate();
+
+        animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.translate);
+
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            int a;
+            @Override
+            public void onAnimationStart(Animation animation) {
+                Toast.makeText(MainActivity.this, "started", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                // the second part of the anima
+                Toast.makeText(MainActivity.this, "finished", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                Toast.makeText(MainActivity.this, "repeated", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void animate()
@@ -105,7 +126,25 @@ public class MainActivity extends AppCompatActivity {
                     && findViewById(R.id.Btn2).getContentDescription().equals("up")) {
                 animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.translate);
                 stickFigure.startAnimation(animation);
-                animate();
+
+                animation.setAnimationListener(new Animation.AnimationListener() {
+                    int a;
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                        Toast.makeText(MainActivity.this, "started", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        // the second part of the anima
+                        Toast.makeText(MainActivity.this, "finished", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                        Toast.makeText(MainActivity.this, "repeated", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         }
         catch (NullPointerException e)
@@ -134,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 ((Button) view).setBackground( ((Button) event.getLocalState()).getBackground());
                 ((Button) view).setContentDescription( ((Button) event.getLocalState()).getContentDescription());
+                ((Button) view).setText("    ");
             }
 
             return true;
