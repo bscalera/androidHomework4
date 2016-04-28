@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 // the second part of the anima
-
+                Toast.makeText(MainActivity.this, "finished", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                     && findViewById(R.id.Btn2).getContentDescription().equals("up")) {
                 animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.translate);
                 stickFigure.startAnimation(animation);
+                animate();
             }
         }
         catch (NullPointerException e)
