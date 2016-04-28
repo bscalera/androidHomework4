@@ -123,6 +123,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void play(View view) {
 
+        int left = stickFigure.getLeft();
+        float X = stickFigure.getX();
+        float Y = stickFigure.getY();
+        Toast.makeText(MainActivity.this, "left: " + left + " X: " + X + " Y: " + Y, Toast.LENGTH_LONG).show();
+
         try {
             if (findViewById(R.id.Btn1).getContentDescription().equals("right")
                     && findViewById(R.id.Btn2).getContentDescription().equals("up")) {
@@ -138,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
         }
         catch (NullPointerException e)
         {
-            Toast.makeText(MainActivity.this, "There is nothing in step 1 to be played.", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "There is nothing in step 1 to be played.", Toast.LENGTH_SHORT).show();
         }
 
         //SharedValuesXY.drawingMode="RECT";
@@ -148,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                 + findViewById(R.id.Btn3).getContentDescription() + ", "
                 + findViewById(R.id.Btn4).getContentDescription();
         //I found getContentDescription by typing "get" after the button and then looking through the suggestions.
-        Toast.makeText(MainActivity.this, description, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this, description, Toast.LENGTH_SHORT).show();
     }
 
     public void exit(View view) {
