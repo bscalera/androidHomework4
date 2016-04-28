@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     Animation animation;
     Animation animation1_1;
     ImageView stickFigure;
+    int stepNumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +89,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         animation1_1 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.translate1_1);
+        animation1_1.setAnimationListener(new Animation.AnimationListener() {
+            int a;
+            @Override
+            public void onAnimationStart(Animation animation) {
+                Toast.makeText(MainActivity.this, "started", Toast.LENGTH_SHORT).show();
+                System.out.println("qwertyuiop");
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                // the second part of the anima
+                Toast.makeText(MainActivity.this, "finished", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                Toast.makeText(MainActivity.this, "repeated", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void animate()
@@ -126,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         int left = stickFigure.getLeft();
         float X = stickFigure.getX();
         float Y = stickFigure.getY();
-        Toast.makeText(MainActivity.this, "left: " + left + " X: " + X + " Y: " + Y, Toast.LENGTH_LONG).show();
+        //Toast.makeText(MainActivity.this, "left: " + left + " X: " + X + " Y: " + Y, Toast.LENGTH_LONG).show();
 
         try {
             if (findViewById(R.id.Btn1).getContentDescription().equals("right")
