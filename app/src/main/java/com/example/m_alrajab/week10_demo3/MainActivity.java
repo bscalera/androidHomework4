@@ -7,6 +7,9 @@ import android.graphics.Point;
 import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.DragEvent;
 import android.view.Menu;
@@ -30,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     Animation animation;
     Animation animation1_1;
     ImageView stickFigure;
-    int stepNumber;
+    int stepNumber = 0;     //I needed to create this because the animationListener was not working.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         });
         animation1_1 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.translate1_1);
         animation1_1.setAnimationListener(new Animation.AnimationListener() {
-            int a;
+            int b;
             @Override
             public void onAnimationStart(Animation animation) {
                 Toast.makeText(MainActivity.this, "started", Toast.LENGTH_SHORT).show();
@@ -149,16 +152,21 @@ public class MainActivity extends AppCompatActivity {
         //Toast.makeText(MainActivity.this, "left: " + left + " X: " + X + " Y: " + Y, Toast.LENGTH_LONG).show();
 
         try {
-            if (findViewById(R.id.Btn1).getContentDescription().equals("right")
+            if (stepNumber == 0 &&
+                    findViewById(R.id.Btn1).getContentDescription().equals("right")
                     && findViewById(R.id.Btn2).getContentDescription().equals("up")) {
                 animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.translate);
                 stickFigure.startAnimation(animation);
+                stepNumber = 2;
+
             }
-            else if (findViewById(R.id.Btn1).getContentDescription().equals("right")
-                    && ! findViewById(R.id.Btn2).getContentDescription().equals("up"))
+            else if (stepNumber == 0 &&
+                    findViewById(R.id.Btn1).getContentDescription().equals("right") &&
+                    (! findViewById(R.id.Btn2).getContentDescription().equals("up") || findViewById(R.id.Btn2).getContentDescription().equals(null)))
             {
                 animation1_1 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.translate1_1);
                 stickFigure.startAnimation(animation1_1);
+                stepNumber = 1;
             }
         }
         catch (NullPointerException e)
@@ -174,6 +182,50 @@ public class MainActivity extends AppCompatActivity {
                 + findViewById(R.id.Btn4).getContentDescription();
         //I found getContentDescription by typing "get" after the button and then looking through the suggestions.
         //Toast.makeText(MainActivity.this, description, Toast.LENGTH_SHORT).show();
+
+        if (stepNumber == 2)
+        {
+            try {
+                //http://android-developers.blogspot.com/2009/05/painless-threading.html
+                //http://stackoverflow.com/questions/6732529/cant-create-handler-looper-prepare-in-inherited-activity
+                final Handler[] innerHandler = new Handler[1];
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Looper.prepare();
+                        innerHandler[0] = new Handler() {
+                            @Override
+                            public void handleMessage(Message message)
+                            {
+                                Toast.makeText(MainActivity.this, "go to level 2", Toast.LENGTH_LONG).show();
+                            }
+                            @Override
+                            public void dispatchMessage(Message message)
+                            {
+                                handleMessage(message);
+                            }
+                            /*
+                            //http://stackoverflow.com/questions/3342651/how-can-i-delay-a-java-program-for-a-few-seconds
+                            try {
+                                Thread.sleep(1000);                 //1000 milliseconds is one second.
+                                Toast.makeText(MainActivity.this, "go to level 2", Toast.LENGTH_LONG).show();
+                            } catch(InterruptedException ex) {
+                                Thread.currentThread().interrupt();
+                            }
+                            */
+                        };
+
+                        //Message message = innerHandler.obtainMessage();
+                        //innerHandler.dispatchMessage(message);
+                        Looper.loop();
+                    }
+                }).start();
+            }
+            catch (Exception ex) {
+                System.out.println(ex);
+                Toast.makeText(MainActivity.this, "go to next level", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     public void exit(View view) {
