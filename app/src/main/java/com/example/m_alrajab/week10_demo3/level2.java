@@ -2,29 +2,23 @@ package com.example.m_alrajab.week10_demo3;
 
 import android.content.ClipData;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Point;
-import android.media.Image;
 import android.media.MediaPlayer;
-import android.os.Bundle;
-import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.DragEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class level2 extends AppCompatActivity {
 
     StartDraggingLsntr myStartDraggingLsnr;
     EndDraggingLsntr myEndDraggingLsntr;
@@ -32,19 +26,23 @@ public class MainActivity extends AppCompatActivity {
     //MyPanel panel;
     MediaPlayer waves;
     Animation animation;
-    Animation animation1_1;
+    Animation animation2_1;
     Animation animation1_2;
     ImageView stickFigure;
+    ImageView boat;
+    RelativeLayout boatAndStickFigure;
     int stepNumber = 0;     //I needed to create this because the animationListener was not working.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_level2);
 
         myStartDraggingLsnr=new StartDraggingLsntr();
         myEndDraggingLsntr=new EndDraggingLsntr();
 
         stickFigure = (ImageView) findViewById(R.id.stickFigure);
+        boat = (ImageView) findViewById(R.id.stickFigure);
+        boatAndStickFigure = (RelativeLayout) findViewById(R.id.boatAndStickFigure);
         rectBtn=(Button) findViewById(R.id.rectBtn);
         findViewById(R.id.rectBtn).setOnLongClickListener(myStartDraggingLsnr);
         findViewById(R.id.upBtn).setOnLongClickListener(myStartDraggingLsnr);
@@ -58,154 +56,107 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.Btn4).setOnDragListener(myEndDraggingLsntr);
 
 
-        /*
-        http://stackoverflow.com/questions/8257530/how-to-make-the-music-loop-after-the-music-ends-android
-        http://stackoverflow.com/questions/7291731/how-to-play-audio-file-in-android
-        https://www.freesound.org/people/Luftrum/sounds/48412
-        http://bugmenot.com/view/freesound.org
-        http://developer.android.com/guide/appendix/media-formats.html
-        https://www.youtube.com/watch?v=V1ocJmXeQ28
-        */
-
-        waves = MediaPlayer.create(MainActivity.this, R.raw.oceanwavescrushing);
-        waves.setLooping(true);
-        waves.start();
+        //waves = MediaPlayer.create(level2.this, R.raw.oceanwavescrushing);
+        //waves.setLooping(true);
+        //waves.start();
 
         //animate();
 
-        animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.translate);
+        animation = AnimationUtils.loadAnimation(level2.this, R.anim.translate);
 
         animation.setAnimationListener(new Animation.AnimationListener() {
             int a;
             @Override
             public void onAnimationStart(Animation animation) {
-                Toast.makeText(MainActivity.this, "started", Toast.LENGTH_SHORT).show();
+                Toast.makeText(level2.this, "started", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
                 // the second part of the anima
-                Toast.makeText(MainActivity.this, "finished", Toast.LENGTH_SHORT).show();
+                Toast.makeText(level2.this, "finished", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-                Toast.makeText(MainActivity.this, "repeated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(level2.this, "repeated", Toast.LENGTH_SHORT).show();
             }
         });
-        animation1_1 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.translate1_1);
-        animation1_1.setAnimationListener(new Animation.AnimationListener() {
-            int b;
+        animation2_1 = AnimationUtils.loadAnimation(level2.this, R.anim.translate2_1);
+        animation2_1.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                Toast.makeText(MainActivity.this, "started", Toast.LENGTH_SHORT).show();
+                Toast.makeText(level2.this, "started", Toast.LENGTH_SHORT).show();
                 System.out.println("qwertyuiop");
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
                 // the second part of the anima
-                Toast.makeText(MainActivity.this, "finished", Toast.LENGTH_SHORT).show();
+                Toast.makeText(level2.this, "finished", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-                Toast.makeText(MainActivity.this, "repeated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(level2.this, "repeated", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public void animate()
-    {
-        TranslateAnimation anim=new TranslateAnimation(0,0,100,100);
 
-
-        anim.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                // the second part of the anima
-                Toast.makeText(MainActivity.this, "finished", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-    }
-
-/* - This is not needed.  The sound file plays without it.
-    public void playMusic(View view)
-    {
-        waves.start();
-    }
-*/
 
     public void play(View view) {
 
-        int left = stickFigure.getLeft();
-        float X = stickFigure.getX();
-        float Y = stickFigure.getY();
-        //Toast.makeText(MainActivity.this, "left: " + left + " X: " + X + " Y: " + Y, Toast.LENGTH_LONG).show();
+
 
         try {
             if (stepNumber == 0 &&
                     findViewById(R.id.Btn1).getContentDescription().equals("right") &&
-                    (findViewById(R.id.Btn2).getContentDescription() == null))
+                    (findViewById(R.id.Btn2).getContentDescription() == null) &&
+                    (findViewById(R.id.Btn3).getContentDescription() == null))
             {
-                animation1_1 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.translate1_1);
-                stickFigure.startAnimation(animation1_1);
+                animation2_1 = AnimationUtils.loadAnimation(level2.this, R.anim.translate2_1);
+                boatAndStickFigure.startAnimation(animation2_1);
                 stepNumber = 1;
             }
             else if (stepNumber == 0 &&
                     findViewById(R.id.Btn1).getContentDescription().equals("right")
-                    && findViewById(R.id.Btn2).getContentDescription().equals("up")) {
-                animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.translate);
+                    && findViewById(R.id.Btn2).getContentDescription().equals("down")) {
+                animation = AnimationUtils.loadAnimation(level2.this, R.anim.translate);
                 stickFigure.startAnimation(animation);
                 stepNumber = 2;
 
             }
             else if (stepNumber == 0 &&
                     findViewById(R.id.Btn1).getContentDescription().equals("right") &&
-                    (! findViewById(R.id.Btn2).getContentDescription().equals("up") || findViewById(R.id.Btn2).getContentDescription() == null))
+                    (! findViewById(R.id.Btn2).getContentDescription().equals("down")))
             {
-                animation1_1 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.translate1_1);
-                stickFigure.startAnimation(animation1_1);
+                animation2_1 = AnimationUtils.loadAnimation(level2.this, R.anim.translate1_1);
+                stickFigure.startAnimation(animation2_1);
                 stepNumber = 1;
             }
             else if (stepNumber == 1 &&
                     findViewById(R.id.Btn1).getContentDescription().equals("up"))
             {
-                animation1_2 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.translate1_2);
+                animation1_2 = AnimationUtils.loadAnimation(level2.this, R.anim.translate1_2);
                 stickFigure.startAnimation(animation1_2);
                 stepNumber = 2;
             }
         }
         catch (NullPointerException e)
         {
-            Toast.makeText(MainActivity.this, "There is nothing in step 1 to be played.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(level2.this, "There is nothing in step 1 to be played.", Toast.LENGTH_SHORT).show();
         }
 
-        //SharedValuesXY.drawingMode="RECT";
         String description;
         description = "sequence: " + findViewById(R.id.Btn1).getContentDescription() + ", "
                 + findViewById(R.id.Btn2).getContentDescription() + ", "
                 + findViewById(R.id.Btn3).getContentDescription() + ", "
                 + findViewById(R.id.Btn4).getContentDescription();
-        //I found getContentDescription by typing "get" after the button and then looking through the suggestions.
-        //Toast.makeText(MainActivity.this, description, Toast.LENGTH_SHORT).show();
 
         if (stepNumber == 2)
         {
             try {
-                //http://android-developers.blogspot.com/2009/05/painless-threading.html
-                //http://stackoverflow.com/questions/6732529/cant-create-handler-looper-prepare-in-inherited-activity
-                //https://www.youtube.com/watch?v=B25Nx48JuVo
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -214,16 +165,16 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             Thread.sleep(9000);
                             System.out.println("qwertyuiop");
-                            Toast.makeText(MainActivity.this, "go to level 2", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(MainActivity.this, level2.class);
-                            startActivity(intent);
+                            Toast.makeText(level2.this, "go to level 2", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(level2.this, level2.class);
+                            //startActivity(intent);
                         }
                         catch (InterruptedException e)
                         {
                             e.printStackTrace();
                         }
 
-                        Toast.makeText(MainActivity.this, "go to level 2", Toast.LENGTH_LONG).show();
+                        Toast.makeText(level2.this, "go to level 2", Toast.LENGTH_LONG).show();
 
                             /*
                             //http://stackoverflow.com/questions/3342651/how-can-i-delay-a-java-program-for-a-few-seconds
@@ -242,13 +193,13 @@ public class MainActivity extends AppCompatActivity {
             }
             catch (Exception ex) {
                 System.out.println(ex);
-                Toast.makeText(MainActivity.this, "go to next level", Toast.LENGTH_LONG).show();
+                Toast.makeText(level2.this, "go to next level", Toast.LENGTH_LONG).show();
             }
         }
     }
 
     public void exit(View view) {
-        Toast.makeText(MainActivity.this, "exit the game", Toast.LENGTH_SHORT).show();
+        Toast.makeText(level2.this, "exit the game", Toast.LENGTH_SHORT).show();
     }
 
     private class EndDraggingLsntr implements View.OnDragListener{
