@@ -27,7 +27,8 @@ public class level2 extends AppCompatActivity {
     MediaPlayer waves;
     Animation animation;
     Animation animation2_1;
-    Animation animation1_2;
+    Animation animation2_2;
+    Animation animation2_3;
     ImageView stickFigure;
     ImageView boat;
     RelativeLayout boatAndStickFigure;
@@ -112,8 +113,7 @@ public class level2 extends AppCompatActivity {
         try {
             if (stepNumber == 0 &&
                     findViewById(R.id.Btn1).getContentDescription().equals("right") &&
-                    (findViewById(R.id.Btn2).getContentDescription() == null) &&
-                    (findViewById(R.id.Btn3).getContentDescription() == null))
+                    (findViewById(R.id.Btn2).getContentDescription() == null))
             {
                 animation2_1 = AnimationUtils.loadAnimation(level2.this, R.anim.translate2_1);
                 boatAndStickFigure.startAnimation(animation2_1);
@@ -121,7 +121,8 @@ public class level2 extends AppCompatActivity {
             }
             else if (stepNumber == 0 &&
                     findViewById(R.id.Btn1).getContentDescription().equals("right")
-                    && findViewById(R.id.Btn2).getContentDescription().equals("down")) {
+                    && findViewById(R.id.Btn2).getContentDescription().equals("down")
+                    && findViewById(R.id.Btn3).getContentDescription() == null) {
                 animation = AnimationUtils.loadAnimation(level2.this, R.anim.translate);
                 stickFigure.startAnimation(animation);
                 stepNumber = 2;
@@ -136,11 +137,18 @@ public class level2 extends AppCompatActivity {
                 stepNumber = 1;
             }
             else if (stepNumber == 1 &&
-                    findViewById(R.id.Btn1).getContentDescription().equals("up"))
+                    findViewById(R.id.Btn1).getContentDescription().equals("down"))
             {
-                animation1_2 = AnimationUtils.loadAnimation(level2.this, R.anim.translate1_2);
-                stickFigure.startAnimation(animation1_2);
+                animation2_2 = AnimationUtils.loadAnimation(level2.this, R.anim.translate2_2);
+                boatAndStickFigure.startAnimation(animation2_2);
                 stepNumber = 2;
+            }
+            else if (stepNumber == 2 &&
+                    findViewById(R.id.Btn1).getContentDescription().equals("right"))
+            {
+                animation2_3 = AnimationUtils.loadAnimation(level2.this, R.anim.translate2_3);
+                boatAndStickFigure.startAnimation(animation2_3);
+                stepNumber = 3;
             }
         }
         catch (NullPointerException e)
@@ -154,7 +162,7 @@ public class level2 extends AppCompatActivity {
                 + findViewById(R.id.Btn3).getContentDescription() + ", "
                 + findViewById(R.id.Btn4).getContentDescription();
 
-        if (stepNumber == 2)
+        if (stepNumber == 3)
         {
             try {
                 new Thread(new Runnable() {
@@ -166,8 +174,8 @@ public class level2 extends AppCompatActivity {
                             Thread.sleep(9000);
                             System.out.println("qwertyuiop");
                             Toast.makeText(level2.this, "go to level 2", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(level2.this, level2.class);
-                            //startActivity(intent);
+                            Intent intent = new Intent(level2.this, level3.class);
+                            startActivity(intent);
                         }
                         catch (InterruptedException e)
                         {

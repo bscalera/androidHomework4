@@ -24,9 +24,9 @@
         <activity
             android:name=".level2"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <!--http://stackoverflow.com/questions/26492522/how-do-i-remove-the-title-bar-in-android-studio-->
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <!-- http://stackoverflow.com/questions/26492522/how-do-i-remove-the-title-bar-in-android-studio -->
+        <activity android:name=".level3"></activity>
     </application>
 
 </manifest>
