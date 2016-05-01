@@ -17,17 +17,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+import java.util.Observable;
+import java.util.Observer;
 
 public class level2 extends AppCompatActivity {
 
     StartDraggingLsntr myStartDraggingLsnr;
     EndDraggingLsntr myEndDraggingLsntr;
     Button rectBtn, ovalBtn, btn1, btn2;
-    //MyPanel panel;
     MediaPlayer waves;
     Animation animation;
     Animation animation2_1;
+    Animation animation2_12;
+    Animation animation2_123;
     Animation animation2_2;
+    Animation animation2_23;
     Animation animation2_3;
     ImageView stickFigure;
     ImageView boat;
@@ -102,6 +106,8 @@ public class level2 extends AppCompatActivity {
                 Toast.makeText(level2.this, "repeated", Toast.LENGTH_SHORT).show();
             }
         });
+
+
     }
 
 
@@ -120,28 +126,62 @@ public class level2 extends AppCompatActivity {
                 stepNumber = 1;
             }
             else if (stepNumber == 0 &&
-                    findViewById(R.id.Btn1).getContentDescription().equals("right")
-                    && findViewById(R.id.Btn2).getContentDescription().equals("down")
-                    && findViewById(R.id.Btn3).getContentDescription() == null) {
-                animation = AnimationUtils.loadAnimation(level2.this, R.anim.translate);
-                stickFigure.startAnimation(animation);
-                stepNumber = 2;
-
-            }
-            else if (stepNumber == 0 &&
                     findViewById(R.id.Btn1).getContentDescription().equals("right") &&
                     (! findViewById(R.id.Btn2).getContentDescription().equals("down")))
             {
-                animation2_1 = AnimationUtils.loadAnimation(level2.this, R.anim.translate1_1);
+                animation2_1 = AnimationUtils.loadAnimation(level2.this, R.anim.translate2_12);
                 stickFigure.startAnimation(animation2_1);
                 stepNumber = 1;
             }
+            else if (stepNumber == 0 &&
+                    findViewById(R.id.Btn1).getContentDescription().equals("right")
+                    && findViewById(R.id.Btn2).getContentDescription().equals("down")
+                    && findViewById(R.id.Btn3).getContentDescription() == null) {
+                animation2_12 = AnimationUtils.loadAnimation(level2.this, R.anim.translate2_12);
+                boatAndStickFigure.startAnimation(animation2_12);
+                stepNumber = 2;
+            }
+            else if (stepNumber == 0 &&
+                    findViewById(R.id.Btn1).getContentDescription().equals("right")
+                    && findViewById(R.id.Btn2).getContentDescription().equals("down")
+                    && (! findViewById(R.id.Btn3).getContentDescription().equals("right"))) {
+                animation2_123 = AnimationUtils.loadAnimation(level2.this, R.anim.translate2_123);
+                stickFigure.startAnimation(animation2_12);  //
+                stepNumber = 2;
+            }
+            else if (stepNumber == 0 &&
+                    findViewById(R.id.Btn1).getContentDescription().equals("right")
+                    && findViewById(R.id.Btn2).getContentDescription().equals("down")
+                    && findViewById(R.id.Btn3).getContentDescription().equals("right")) {
+                animation2_123 = AnimationUtils.loadAnimation(level2.this, R.anim.translate2_123);
+                boatAndStickFigure.startAnimation(animation2_123);
+                stepNumber = 3;
+                //This does not appear the right way, so I tried to do it a different way.
+                //step3wait();
+            }
             else if (stepNumber == 1 &&
-                    findViewById(R.id.Btn1).getContentDescription().equals("down"))
+                    findViewById(R.id.Btn1).getContentDescription().equals("down") &&
+                    findViewById(R.id.Btn2).getContentDescription().equals(null))
             {
                 animation2_2 = AnimationUtils.loadAnimation(level2.this, R.anim.translate2_2);
                 boatAndStickFigure.startAnimation(animation2_2);
                 stepNumber = 2;
+            }
+            else if (stepNumber == 1 &&
+                    findViewById(R.id.Btn1).getContentDescription().equals("down") &&
+                    (! findViewById(R.id.Btn2).getContentDescription().equals("right")))
+            {
+                animation2_2 = AnimationUtils.loadAnimation(level2.this, R.anim.translate2_2);
+                boatAndStickFigure.startAnimation(animation2_2);
+                stepNumber = 2;
+            }
+            else if (stepNumber == 1 &&
+                    findViewById(R.id.Btn1).getContentDescription().equals("down") &&
+                    (findViewById(R.id.Btn2).getContentDescription().equals("right")))
+            {
+                animation2_23 = AnimationUtils.loadAnimation(level2.this, R.anim.translate2_23);
+                boatAndStickFigure.startAnimation(animation2_23);
+                stepNumber = 3;
             }
             else if (stepNumber == 2 &&
                     findViewById(R.id.Btn1).getContentDescription().equals("right"))
@@ -149,6 +189,10 @@ public class level2 extends AppCompatActivity {
                 animation2_3 = AnimationUtils.loadAnimation(level2.this, R.anim.translate2_3);
                 boatAndStickFigure.startAnimation(animation2_3);
                 stepNumber = 3;
+            }
+            else
+            {
+                Toast.makeText(level2.this, "No", Toast.LENGTH_SHORT).show();
             }
         }
         catch (NullPointerException e)
@@ -161,6 +205,7 @@ public class level2 extends AppCompatActivity {
                 + findViewById(R.id.Btn2).getContentDescription() + ", "
                 + findViewById(R.id.Btn3).getContentDescription() + ", "
                 + findViewById(R.id.Btn4).getContentDescription();
+        Toast.makeText(level2.this, description, Toast.LENGTH_SHORT).show();
 
         if (stepNumber == 3)
         {
@@ -183,19 +228,6 @@ public class level2 extends AppCompatActivity {
                         }
 
                         Toast.makeText(level2.this, "go to level 2", Toast.LENGTH_LONG).show();
-
-                            /*
-                            //http://stackoverflow.com/questions/3342651/how-can-i-delay-a-java-program-for-a-few-seconds
-                            try {
-                                Thread.sleep(1000);                 //1000 milliseconds is one second.
-                                Toast.makeText(MainActivity.this, "go to level 2", Toast.LENGTH_LONG).show();
-                            } catch(InterruptedException ex) {
-                                Thread.currentThread().interrupt();
-                            }
-                            */
-
-
-
                     }
                 }).start();
             }
@@ -203,6 +235,46 @@ public class level2 extends AppCompatActivity {
                 System.out.println(ex);
                 Toast.makeText(level2.this, "go to next level", Toast.LENGTH_LONG).show();
             }
+        }
+    }
+
+    private void step3wait()
+    {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                try {
+                    Thread.sleep(6000);
+                    step3();
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    private void step3()
+    {
+        animation2_3 = AnimationUtils.loadAnimation(level2.this, R.anim.translate2_3);
+        boatAndStickFigure.startAnimation(animation2_3);
+        stepNumber = 3;
+    }
+    //http://stackoverflow.com/questions/14457711/android-listening-for-variable-changes
+    //http://stackoverflow.com/questions/7157123/in-android-how-do-i-take-an-action-whenever-a-variable-changes/7157281#7157281
+    public interface step3Listener
+    {
+        public void onVariableChanged (boolean step3);
+
+    }
+    //http://stackoverflow.com/questions/15433855/how-to-create-change-listener-for-variable
+    public class Step3Listener implements Observer
+    {
+        @Override
+        public void update(Observable observable, Object o) {
+
         }
     }
 
