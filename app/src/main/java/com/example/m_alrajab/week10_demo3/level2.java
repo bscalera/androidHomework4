@@ -238,6 +238,7 @@ public class level2 extends AppCompatActivity {
         }
     }
 
+    /*
     private void step3wait()
     {
         new Thread(new Runnable() {
@@ -277,6 +278,7 @@ public class level2 extends AppCompatActivity {
 
         }
     }
+    */
 
     public void exit(View view) {
         Toast.makeText(level2.this, "exit the game", Toast.LENGTH_SHORT).show();
